@@ -49,7 +49,7 @@ def update_resident_info():
     if AccountTable.query(account) is None:
         return json.dumps({"data": "failure", "ret_code": 2})
     AccountTable.update_info(account, name, unit, room, phone)
-    return {"data": "ok", "ret_code": 1}
+    return json.dumps({"data": "ok", "ret_code": 1})
 
 
 if __name__ == "__main__":
