@@ -43,6 +43,8 @@ class AccountTable:
         res = cursor.fetchall()
         cursor.close()
         conn.close()
+        if res == []:
+            return None
         return res[0]
 
     @classmethod
@@ -80,11 +82,3 @@ class AccountTable:
         cursor.close()
         conn.commit()
         conn.close()
-
-
-if __name__ == "__main__":
-    # AccountTable.create_table()
-    # AccountTable.insert("33333333", "123456")
-    # AccountTable.update_info(account="33333333", name="saltfish")
-    # print(AccountTable.query("33333333"))
-    pass
