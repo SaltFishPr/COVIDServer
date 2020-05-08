@@ -1,0 +1,2 @@
+# COVIDServer
+android covidapp server
