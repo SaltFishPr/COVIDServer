@@ -3,7 +3,7 @@
 # @author: SaltFish
 # @file: app.py
 # @date: 2020/05/06
-from flask import Flask, redirect, url_for, request, Response
+from flask import Flask, request
 from database.covid_db import AccountTable
 import json
 
@@ -21,7 +21,7 @@ def login():
     password = request.form["password"]
     print(f"account: {account}, password: {password}")
     res = AccountTable.query(account)
-    if res == None:
+    if res is None:
         return json.dumps({"data": False, "ret_code": 2})  # 不存在此用户
     if password == res[1]:
         return json.dumps({"data": True, "ret_code": 1})  # 密码匹配
@@ -33,9 +33,8 @@ def login():
 def register():
     account = request.form["account"]
     password = request.form["password"]
-    if AccountTable.query(account, password) != None:{
+    if AccountTable.query(account) is not None:
         return json.dumps({"data": "failure", "ret_code": 2})
-    }
     AccountTable.insert(account, password)
     return json.dumps({"data": "ok", "ret_code": 1})
 
@@ -47,6 +46,8 @@ def update_resident_info():
     unit = request.form["unit"]
     room = request.form["room"]
     phone = request.form["phone"]
+    if AccountTable.query(account) is None:
+        return json.dumps({"data": "failure", "ret_code": 2})
     AccountTable.update_info(account, name, unit, room, phone)
     return {"data": "ok", "ret_code": 1}
 
