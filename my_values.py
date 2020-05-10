@@ -12,3 +12,6 @@ constant.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 constant.COVID_DB_PATH = os.path.join(
     os.path.join(constant.BASE_DIR, "database"), "covid.sqlite"
 )
+
+constant.SUCCESS = 1
+constant.DB_FAILURE = 2

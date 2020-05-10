@@ -135,7 +135,8 @@ class RecordTable:
         cursor = conn.cursor()
         sql = (
             f"SELECT * FROM {RecordEntry.TABLE_NAME} "
-            f"WHERE {RecordEntry.COLUMN_ID_CARD}='{account}'; "
+            f"WHERE {RecordEntry.COLUMN_ID_CARD}='{account}'"
+            f"ORDER BY {RecordEntry.COLUMN_TIME} DESC; "
         )
         cursor.execute(sql)
         res = cursor.fetchall()
