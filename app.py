@@ -3,9 +3,10 @@
 # @author: SaltFish
 # @file: app.py
 # @date: 2020/05/06
+import time
 from flask import Flask, request
-from database.covid_db import AccountTable
 import json
+from database.covid_db import AccountTable, RecordTable
 
 app = Flask(__name__)
 
@@ -17,6 +18,10 @@ def index():
 
 @app.route("/login", methods=["POST"])
 def login():
+    """
+    登录
+    :return:
+    """
     account = request.form["account"]
     password = request.form["password"]
     print(f"account: {account}, password: {password}")
@@ -31,6 +36,10 @@ def login():
 
 @app.route("/register", methods=["POST"])
 def register():
+    """
+    注册
+    :return:
+    """
     account = request.form["account"]
     password = request.form["password"]
     if AccountTable.query(account) is not None:
@@ -39,8 +48,36 @@ def register():
     return json.dumps({"data": "ok", "ret_code": 1})
 
 
+@app.route("/post_record", methods=["POST"])
+def post_record():
+    """
+    上传通行信息
+    :return:
+    """
+    account = request.form["account"]
+    gate = request.form["gate"]
+    now_time = int(time.time())
+    # 判断是否允许通过
+    RecordTable.query(account)
+    # ...
+    RecordTable.insert(account, gate, now_time)
+
+
+@app.route("/get_record/<account>")
+def get_record(account):
+    """
+    获取通信信息
+    :return:
+    """
+    pass
+
+
 @app.route("/update_resident", methods=["POST"])
 def update_resident_info():
+    """
+    更新用户信息
+    :return:
+    """
     account = request.form["account"]
     name = request.form["name"]
     unit = request.form["unit"]

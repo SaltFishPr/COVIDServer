@@ -3,7 +3,11 @@
 # @author: SaltFish
 # @file: test.py
 # @date: 2020/05/06
-from database.covid_db import AccountTable
+import time
+
+from database.covid_db import AccountTable, RecordTable
 
 if __name__ == "__main__":
-    AccountTable.create_table()
+    # RecordTable.create_table()
+    # RecordTable.insert(1, 1, 0)
+    pass

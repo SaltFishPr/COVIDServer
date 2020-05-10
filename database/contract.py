@@ -13,3 +13,10 @@ class ResidentEntry:
     COLUMN_UNIT = "unit"
     COLUMN_ROOM = "room"
     COLUMN_PHONE = "phone"
+
+
+class RecordEntry:
+    TABLE_NAME = "records"
+    COLUMN_ID_CARD = "id_card"
+    COLUMN_TIME = "time"
+    COLUMN_GATE = "gate"
