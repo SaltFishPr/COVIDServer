@@ -80,9 +80,10 @@ def get_record(account):
         return json.dumps({"data": None, "ret_code": constant.DB_FAILURE})
     res = []
     for i in RecordTable.query(account):
-        temp = {"gate": i[2], "time": datetime.datetime.fromtimestamp(i[3]).date()}
+        temp = {"gate": i[2], "time": str(datetime.datetime.fromtimestamp(i[3]).date())}
         res.append(temp)
-    return json.dumps({"data": json.dumps(res), "ret_code": constant.SUCCESS})
+    print(res)
+    return json.dumps({"data": res, "ret_code": constant.SUCCESS})
 
 
 @app.route("/update_resident", methods=["POST"])
