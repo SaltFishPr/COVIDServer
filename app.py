@@ -61,13 +61,18 @@ def post_record():
     now_time = int(time.time())
     # 判断是否允许通过
     res = RecordTable.query(account)
-    date1 = datetime.datetime.fromtimestamp(res[0][2])
-    date2 = datetime.datetime.fromtimestamp(time.time())
-    if date1.date() == date2.date():
-        return json.dumps({"result": "forbid", "ret_code": constant.DB_FAILURE})
-    else:
+    print(res)
+    if res == []:
         RecordTable.insert(account, gate, now_time)
         return json.dumps({"result": "permit", "ret_code": constant.SUCCESS})
+    else:
+        date1 = datetime.datetime.fromtimestamp(res[0][3])
+        date2 = datetime.datetime.fromtimestamp(time.time())
+        if date1.date() == date2.date():
+            return json.dumps({"result": "forbid", "ret_code": constant.SUCCESS})
+        else:
+            RecordTable.insert(account, gate, now_time)
+            return json.dumps({"result": "permit", "ret_code": constant.SUCCESS})
 
 
 @app.route("/get_record/<account>")
