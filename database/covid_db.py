@@ -74,6 +74,15 @@ class AccountTable:
 
     @classmethod
     def update_info(cls, account, name="default", unit=-1, room=-1, phone=-1):
+        """
+        更新用户信息
+        :param account: 身份证号码
+        :param name: 名字
+        :param unit: 单元
+        :param room: 室
+        :param phone: 手机号码
+        :return:
+        """
         conn = sqlite3.connect(constant.COVID_DB_PATH)
         cursor = conn.cursor()
         sql = (
@@ -91,6 +100,11 @@ class AccountTable:
 
     @classmethod
     def delete(cls, account):
+        """
+        移除用户
+        :param account: 身份证号码
+        :return:
+        """
         conn = sqlite3.connect(constant.COVID_DB_PATH)
         cursor = conn.cursor()
         sql = (

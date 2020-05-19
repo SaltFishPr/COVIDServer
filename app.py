@@ -62,7 +62,7 @@ def post_record():
     # 判断是否允许通过
     res = RecordTable.query(account)
     print(res)
-    if res == []:
+    if not res:
         RecordTable.insert(account, gate, now_time)
         return json.dumps({"result": "permit", "ret_code": constant.SUCCESS})
     else:
